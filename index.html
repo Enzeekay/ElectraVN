@@ -1,105 +1,39 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>On Development | RNDC Vietnam</title>
-    <style>
-      html,
-      body {
-        height: 100%;
-      }
-
-      body {
-        margin: 0;
-      }
-
-      h1 {
-        font-size: 20px;
-        font-family: Tahoma;
-        line-height: 20px;
-        color: whitesmoke;
-        padding: 13px 0px 0px 20px;
-      }
-
-      .heading {
-        background-color: #009874;
-        height: 50px;
-      }
-
-      .main {
-        margin: 18px;
-        border-radius: 4px;
-      }
-
-      div[role="form"] {
-        background-color: #009874;
-      }
-
-      #webchat {
-        position: fixed;
-        height: calc(100% - 50px);
-        width: 100%;
-        top: 50px;
-        overflow: hidden;
-      }
-    </style>
-  </head>
-  <body>
-    <div>
-      <div class="heading">
-        <h1>Electra</h1>
-      </div>
-      <div id="webchat" role="main"></div>
-    </div>
-    <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
-    <script>
-      const styleOptions = {
-        hideUploadButton: true
-      };
-
-      var BOT_ID = "55b31c77-e284-4122-972f-5f5c8e2af003";
-
-      var theURL =
-        "https://powerva.microsoft.com/api/botmanagement/v1/directline/directlinetoken?botId=" +
-        BOT_ID;
-
-      const store = window.WebChat.createStore(
-        {},
-        ({ dispatch }) => next => action => {
-          if (action.type === "DIRECT_LINE/CONNECT_FULFILLED") {
-            dispatch({
-              meta: {
-                method: "keyboard"
-              },
-              payload: {
-                activity: {
-                  channelData: {
-                    postBack: true
-                  },
-                  name: "startConversation",
-                  type: "event"
-                }
-              },
-              type: "DIRECT_LINE/POST_ACTIVITY"
-            });
-          }
-          return next(action);
-        }
-      );
-      fetch(theURL)
-        .then(response => response.json())
-        .then(conversationInfo => {
-          window.WebChat.renderWebChat(
-            {
-              directLine: window.WebChat.createDirectLine({
-                token: conversationInfo.token
-              }),
-              store: store,
-              styleOptions: styleOptions
-            },
-            document.getElementById("webchat")
-          );
-        })
-        .catch(err => console.error("An error occurred: " + err));
-    </script>
-  </body>
+<head>
+  <title>RNDC - Virtual Network</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    
+    h1 {
+      color: #333;
+    }
+    
+    p {
+      color: #666;
+    }
+    
+    .button {
+      display: inline-block;
+      padding: 12px 24px;
+      background-color: #4CAF50;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+    }
+    
+    .button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to RNDC - Virtual Network</h1>
+  <p>Click the button below to access <strong>rndc.io</strong>.</p>
+  <a href="https://rndc.io" class="button">Access RNDC.io</a>
+</body>
+</html>
